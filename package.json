@@ -1,0 +1,35 @@
+{
+  "name": "ailaughlab-v2",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "prebuild": "npx tsx scripts/generate-noise.ts && npx tsx scripts/compute-animations.ts && npx tsx scripts/process-theme-assets.ts",
+    "build": "npm run prebuild && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12",
+    "gsap": "^3.12",
+    "lenis": "^1.2",
+    "next": "^15.2",
+    "react": "^19",
+    "react-dom": "^19",
+    "three": "^0.172"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/three": "^0.172",
+    "eslint": "^9",
+    "eslint-config-next": "^15",
+    "postcss": "^8",
+    "tailwindcss": "^4",
+    "tsx": "^4",
+    "typescript": "^5.8"
+  }
+}

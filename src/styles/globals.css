@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* Self-hosted fonts */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/clash-display-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/clash-display-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/clash-display-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/clash-display-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-accent: var(--theme-accent, #00E5A0);
+  --color-accent-secondary: var(--theme-accent-secondary, #00D4FF);
+  --color-bg-dark: var(--theme-bg-dark, #0A0E17);
+  --color-bg-deep: var(--theme-bg-deep, #060910);
+  --color-bg-card: var(--theme-bg-card, #111827);
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #9CA3AF;
+  --color-text-muted: #6B7280;
+  --font-display: 'Clash Display', system-ui, sans-serif;
+  --font-body: 'General Sans', system-ui, sans-serif;
+}
+
+/* Theme definitions */
+html,
+html[data-theme="ai-lab"] {
+  --theme-accent: #00E5A0;
+  --theme-accent-secondary: #00D4FF;
+  --theme-bg-dark: #0A0E17;
+  --theme-bg-deep: #060910;
+  --theme-bg-card: #111827;
+}
+
+html[data-theme="wild-west"] {
+  --theme-accent: #D4A574;
+  --theme-accent-secondary: #C87533;
+  --theme-bg-dark: #1A0F0A;
+  --theme-bg-deep: #100905;
+  --theme-bg-card: #2A1A0E;
+}
+
+html[data-theme="space-station"] {
+  --theme-accent: #A855F7;
+  --theme-accent-secondary: #3B82F6;
+  --theme-bg-dark: #0B0D1A;
+  --theme-bg-deep: #06070F;
+  --theme-bg-card: #13152B;
+}
+
+html[data-theme="retro-arcade"] {
+  --theme-accent: #FF6EC7;
+  --theme-accent-secondary: #FFFF00;
+  --theme-bg-dark: #1A0A2E;
+  --theme-bg-deep: #0F051C;
+  --theme-bg-card: #251240;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background: var(--color-bg-deep);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Display font utility */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Grain overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 1;
+  mix-blend-mode: overlay;
+  background-image: url('/generated/noise-grain.svg');
+  background-repeat: repeat;
+}
+
+/* Scroll progress indicator */
+.scroll-progress-line {
+  position: fixed;
+  left: 40px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--theme-accent);
+  transform-origin: top;
+  z-index: 40;
+  opacity: 0.4;
+}
+
+/* Selection */
+::selection {
+  background: var(--theme-accent);
+  color: var(--color-bg-deep);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay {
+    display: none;
+  }
+}

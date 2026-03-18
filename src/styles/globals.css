@@ -93,7 +93,7 @@ html[data-theme="retro-arcade"] {
 
 /* Base styles */
 html {
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  scroll-behavior: auto;
 }
 
 body {
@@ -105,40 +105,44 @@ body {
   overflow-x: hidden;
 }
 
+/* CSS fallback gradient (shows before/behind WebGL) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 25% 30%, color-mix(in srgb, var(--theme-accent) 8%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 70%, color-mix(in srgb, var(--theme-accent-secondary) 6%, transparent) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--theme-bg-dark) 0%, var(--theme-bg-deep) 100%);
+}
+
 /* Display font utility */
 .font-display {
   font-family: var(--font-display);
 }
 
-/* Grain overlay */
+/* Grain overlay - use soft-light instead of overlay for dark backgrounds */
 .grain-overlay {
   position: fixed;
   inset: 0;
   z-index: 50;
   pointer-events: none;
-  opacity: 1;
-  mix-blend-mode: overlay;
+  opacity: 0.35;
+  mix-blend-mode: soft-light;
   background-image: url('/generated/noise-grain.svg');
   background-repeat: repeat;
-}
-
-/* Scroll progress indicator */
-.scroll-progress-line {
-  position: fixed;
-  left: 40px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--theme-accent);
-  transform-origin: top;
-  z-index: 40;
-  opacity: 0.4;
 }
 
 /* Selection */
 ::selection {
   background: var(--theme-accent);
   color: var(--color-bg-deep);
+}
+
+/* Accent glow for headings */
+.text-glow-accent {
+  text-shadow: 0 0 80px color-mix(in srgb, var(--theme-accent) 20%, transparent);
 }
 
 /* Reduced motion */

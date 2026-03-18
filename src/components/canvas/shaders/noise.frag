@@ -75,23 +75,33 @@ void main() {
 
   float noise = n1 * 0.6 + n2 * 0.3 + n3 * 0.1;
 
-  // Scroll-reactive brightness
-  float brightness = 0.15 + uScrollProgress * 0.05;
+  // Scroll-reactive brightness - much more visible
+  float brightness = 0.4 + uScrollProgress * 0.15;
 
-  // Color mixing based on noise
-  vec3 color = mix(uColorBgDeep, uColorBg, noise * 0.8);
+  // Base: rich gradient between bg colors
+  vec3 color = mix(uColorBgDeep, uColorBg, noise);
 
-  // Accent color bleeding through at noise peaks
-  float accentMask = smoothstep(0.6, 0.9, n1);
-  color = mix(color, uColorAccent * 0.15, accentMask * brightness);
+  // Accent color nebula clouds - much stronger
+  float accentMask = smoothstep(0.45, 0.8, n1);
+  color = mix(color, uColorAccent * 0.35, accentMask * brightness);
 
   // Secondary accent in different noise region
-  float secondaryMask = smoothstep(0.65, 0.95, n2);
-  color = mix(color, uColorSecondary * 0.1, secondaryMask * brightness);
+  float secondaryMask = smoothstep(0.5, 0.85, n2);
+  color = mix(color, uColorSecondary * 0.25, secondaryMask * brightness);
 
-  // Vignette
+  // Soft glow hotspot (upper-left quadrant)
+  float glowDist = length(uv - vec2(0.3, 0.7));
+  float glow = smoothstep(0.6, 0.0, glowDist) * 0.12;
+  color += uColorAccent * glow;
+
+  // Secondary glow (lower-right)
+  float glow2Dist = length(uv - vec2(0.8, 0.2));
+  float glow2 = smoothstep(0.5, 0.0, glow2Dist) * 0.08;
+  color += uColorSecondary * glow2;
+
+  // Subtle vignette (less aggressive)
   vec2 vignetteUv = vUv * 2.0 - 1.0;
-  float vignette = 1.0 - dot(vignetteUv * 0.5, vignetteUv * 0.5);
+  float vignette = 1.0 - dot(vignetteUv * 0.35, vignetteUv * 0.35);
   color *= vignette;
 
   gl_FragColor = vec4(color, 1.0);

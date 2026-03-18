@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "prebuild": "npx tsx scripts/generate-noise.ts && npx tsx scripts/compute-animations.ts && npx tsx scripts/process-theme-assets.ts",
     "build": "npm run prebuild && next build",
     "start": "next start",

@@ -20,7 +20,6 @@ export function ImmersiveEntry() {
     registerGSAP()
 
     const ctx = gsap.context(() => {
-      // Entry timeline
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
       tl.fromTo(line1Ref.current,
@@ -43,7 +42,6 @@ export function ImmersiveEntry() {
         '-=0.2'
       )
 
-      // Parallax on scroll
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: 'top top',
@@ -68,24 +66,37 @@ export function ImmersiveEntry() {
       id="hero"
       className="relative z-10 min-h-screen flex flex-col justify-end pb-16 md:pb-24 px-6 md:px-12 lg:px-20"
     >
-      <div className="max-w-[1400px]">
+      {/* Accent gradient behind hero text */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at 20% 70%, var(--theme-accent) 0%, transparent 50%)',
+          opacity: 0.06,
+        }}
+      />
+
+      <div className="relative max-w-[1400px]">
         <h1
           ref={line1Ref}
-          className="font-display font-bold text-[clamp(3rem,15vw,25vw)] leading-[0.85] text-text-primary"
+          className="font-display font-bold text-[clamp(3rem,15vw,25vw)] leading-[0.85] text-text-primary text-glow-accent"
           style={{ clipPath: 'inset(0 100% 0 0)' }}
         >
           AI LAUGH
         </h1>
         <h1
           ref={line2Ref}
-          className="font-display font-bold text-[clamp(4rem,20vw,35vw)] leading-[0.85] text-text-primary ml-[5vw]"
+          className="font-display font-bold text-[clamp(4rem,20vw,35vw)] leading-[0.85] text-text-primary ml-[5vw] text-glow-accent"
           style={{ clipPath: 'inset(0 100% 0 0)' }}
         >
           LAB
         </h1>
+
+        {/* Accent underline */}
+        <div className="mt-6 w-24 h-[3px] bg-accent opacity-60" />
+
         <p
           ref={subtitleRef}
-          className="mt-8 text-text-secondary text-lg max-w-[480px] opacity-0"
+          className="mt-6 text-text-secondary text-lg md:text-xl max-w-[480px] leading-relaxed opacity-0"
         >
           {copy.heroSubheadline}
         </p>

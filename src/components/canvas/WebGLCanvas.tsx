@@ -13,8 +13,11 @@ export function WebGLCanvas() {
           antialias: false,
           alpha: false,
           powerPreference: 'high-performance',
+          stencil: false,
+          depth: false,
         }}
-        dpr={[1, 1.5]}
+        dpr={1}
+        frameloop="always"
         style={{ width: '100%', height: '100%' }}
       >
         <Suspense fallback={null}>

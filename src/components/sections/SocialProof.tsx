@@ -44,7 +44,7 @@ export function SocialProof() {
     <section
       ref={sectionRef}
       id="social-proof"
-      className="relative z-10 py-32 md:py-48"
+      className="relative z-10 py-20 md:py-28"
     >
       {/* Section label */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 mb-16">
@@ -58,10 +58,10 @@ export function SocialProof() {
           <div
             key={i}
             ref={(el) => { quoteRefs.current[i] = el }}
-            className="py-16 md:py-24 first:pt-0 last:pb-0"
+            className="py-10 md:py-14 first:pt-0 last:pb-0"
           >
             {i > 0 && (
-              <div className="w-full h-px mb-16 md:mb-24" style={{ background: 'linear-gradient(90deg, var(--theme-accent) 0%, transparent 60%)', opacity: 0.15 }} />
+              <div className="w-full h-px mb-10 md:mb-14" style={{ background: 'linear-gradient(90deg, var(--theme-accent) 0%, transparent 60%)', opacity: 0.15 }} />
             )}
 
             <div className="relative">

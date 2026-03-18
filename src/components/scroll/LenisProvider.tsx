@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Lenis from 'lenis'
-import { registerGSAP, ScrollTrigger } from '@/lib/gsap-setup'
+import { registerGSAP, gsap, ScrollTrigger } from '@/lib/gsap-setup'
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
@@ -11,31 +11,25 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     registerGSAP()
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       touchMultiplier: 2,
     })
 
     lenisRef.current = lenis
 
-    // Connect Lenis to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
 
-    // Use GSAP ticker for Lenis
     const tickHandler = (time: number) => {
       lenis.raf(time * 1000)
     }
 
-    import('gsap').then(({ gsap }) => {
-      gsap.ticker.add(tickHandler)
-      gsap.ticker.lagSmoothing(0)
-    })
+    gsap.ticker.add(tickHandler)
+    gsap.ticker.lagSmoothing(0)
 
     return () => {
+      gsap.ticker.remove(tickHandler)
       lenis.destroy()
-      import('gsap').then(({ gsap }) => {
-        gsap.ticker.remove(tickHandler)
-      })
     }
   }, [])
 

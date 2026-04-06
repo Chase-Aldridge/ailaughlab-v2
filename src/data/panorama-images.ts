@@ -6,7 +6,7 @@ interface PanoramaLayers {
   fg: string | null
 }
 
-const CDN = 'https://res.cloudinary.com/dnflu4ixl/image/upload'
+const CDN = 'https://media.chasealdridge.com'
 
 export const panoramaImages: Record<ThemeId, PanoramaLayers> = {
   'ai-lab': {
